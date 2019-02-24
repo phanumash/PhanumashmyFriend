@@ -27,6 +27,7 @@ import java.io.File;
 
 import it.sauronsoftware.ftp4j.FTPClient;
 import it.sauronsoftware.ftp4j.FTPDataTransferListener;
+import phanumash.th.in.phanumashmyfriend.AddUserThread;
 import phanumash.th.in.phanumashmyfriend.R;
 
 
@@ -160,6 +161,11 @@ public class RegisterFragment extends Fragment {
                 ftpClient.login("ksu@androidthai.in.th", "Abc12345");
                 ftpClient.changeDirectory("MasterUNG");
                 ftpClient.upload(file, new uploadListener());
+
+//                update Database
+                AddUserThread addUserThread = new AddUserThread(getActivity());
+                addUserThread.execute(name,user,password,"https://www.androidthai.in.th/ksu/KSUPhanumash/" +nameImage);
+                addUserThread.get();
 
             } catch (Exception e) {
                 e.printStackTrace();
